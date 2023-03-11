@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+          integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>register</title>
+</head>
+<body>
+<form id="form_register">
+  <fieldset style="display: inline-block;">
+    <legend>회원정보 등록</legend>
+    ID : <input type="text" name="id" placeholder="아이디"><br>
+    PW : <input type="text" name="pw" placeholder="비밀번호"><br>
+    NAME : <input type="text" name="name" placeholder="이름"><br>
+    <div class="register-btn">
+      <button type="button" onclick="register();">등록</button>
+    </div>
+    <a type="button" href="/home">Home</a>
+  </fieldset>
+</form>
+<script>
+        function register() {
+                var form = document.getElementById("form_register");
+                axios.post(`/axios/register`, {id: form.id.value, pw: form.pw.value,name: form.name.value})
+                .then((res)=>{
+                  console.log(res);
+                  console.log(res.data);
+                   alert("회원가입 성공");
+                   document.location.href="/home";
+                });
+            }
+    </script>
+</body>
+</html>
