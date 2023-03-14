@@ -1,11 +1,19 @@
-package sesac.spring.api.sesac.api.DTO;
+package sesac.sesac.domain;
 
-public class RegisterDTO {
-    private String id;
+public class Register {
+    private int id;
+    private String nickname;
     private String pw;
     private String name;
-    public String getId(){
+    public int getId(){
         return id;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
     public String getPw(){
         return pw;
@@ -13,7 +21,7 @@ public class RegisterDTO {
     public String getName(){
         return name;
     }
-    public void setId (String id){
+    public void setId (int id){
         this.id = id;
     }
     public void setPw(String pw){
@@ -22,5 +30,4 @@ public class RegisterDTO {
     public void setName(String name){
         this.name = name;
     }
-
 }
