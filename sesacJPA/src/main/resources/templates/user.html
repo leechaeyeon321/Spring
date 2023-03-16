@@ -23,10 +23,10 @@
   </tr>
   <form id="form_info">
     <tr th:each="user:${list}">
-      <td th:value="${user.getNo()}">번호</td>
-      <td th:value="${user.getId()}">ID</td>
-      <td th:value="${user.getName()}">이름</td>
-      <td th:value="${user.getSayHello()}">인사말</td>
+      <td><input th:value="${user.getNo()}" readonly disabled></input></td>
+      <td><input th:value="${user.getId()}" readonly disabled></input></td>
+      <td><input th:value="${user.getName()}"></input></td>
+      <td><input th:value="${user.getSayHello()}"></input></td>
       <td><button type="button" onclick="edit();">수정</button></td>
       <td><button type="button" onclick="delete();">삭제</button></td>
     </tr>

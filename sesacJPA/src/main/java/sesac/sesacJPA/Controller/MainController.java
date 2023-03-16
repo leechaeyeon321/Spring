@@ -31,7 +31,16 @@ public class MainController {
         model.addAttribute("list", null);
         return "";
     }
-
+    @PostMapping("/users/edit")
+    @ResponseBody
+    public String getUser(@RequestBody UserDTO userDTO, Model model){
+        UserEntity user = new UserEntity();
+        user.setName(userDTO.getName());
+        user.setSayHello(userDTO.getSayHello());
+        mainService.editBoard(user);
+        model.addAttribute("list", null);
+        return "";
+    }
     @GetMapping("/user")
     public String getUser(@RequestParam String name, Model model){
         ArrayList<UserDTO> userList = mainService.getUserName(name);
