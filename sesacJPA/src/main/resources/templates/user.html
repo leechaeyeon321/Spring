@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Board</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<h5>게시판</h5>
+<form id="form_register">
+  <input type="text" placeholder="name" name="name">
+  <input type="text" placeholder="인사말" name="sayHello">
+  <button type="button" onclick="register();">작성</button>
+</form>
+<table>
+  <tr>
+    <th>No.</th>
+    <th>ID</th>
+    <th>이름</th>
+    <th>닉네임</th>
+    <th>수정</th>
+    <th>삭제</th>
+  </tr>
+  <form id="form_info">
+    <tr th:each="user:${list}">
+      <td th:value="${user.getNo()}">번호</td>
+      <td th:value="${user.getId()}">ID</td>
+      <td th:value="${user.getName()}">이름</td>
+      <td th:value="${user.getSayHello()}">인사말</td>
+      <td><button type="button" onclick="edit();">수정</button></td>
+      <td><button type="button" onclick="delete();">삭제</button></td>
+    </tr>
+  </form>
+
+</table>
+<script>
+function register(){
+  var form = document.getElementById('form_register');
+            var data = {
+                name: form.name.value,
+                sayHello: form.sayHello.value
+            }
+            axios.post('/users/register', data)
+            .then((res)=>{
+                alert("작성 완료");
+                document.location.href = "/users";
+            });
+}
+  function edit(){
+    var form = document.getElementById('form_info');
+            var data = {
+              name: form.name.value,
+              sayHello: form.sayHello.value
+            }
+            axios.post(`/users/edit`, data)
+            .then((res) => {
+                alert('수정이 완료 됨.');
+                document.location.href = "/users";
+            });
+  }
+</script>
+</body>
+</html>

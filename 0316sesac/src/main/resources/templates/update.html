@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+          integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>update</title>
+</head>
+<body>
+<form id="form_register">
+  <fieldset>
+    <legend>Edit your Information</legend>
+    ID: <input type="text" name="nickname"th:value="'id ' + ${nickname}"></input><br>
+    <span style="color: red; font-size: smaller;">id는 수정 불가</span> <br>
+    NAME: <input type="text" name="name" th:value="'이름 ' + ${name}" /> <br>
+    PW: <input type="password" name="pw" th:value="'id ' + ${pw}" /> <br>
+  </fieldset>
+  <button class="edit-btn" type="button" onclick="edit();"> 편집</button>
+  <button type="button" onclick="out();">회원 탈퇴</button>
+  <a type="button" href="/home">Home</a>
+</form>
+<script>
+        function edit(){
+            var form = document.getElementById("form_register");
+            axios({
+                method: 'post',
+                url: '/update',
+                data: {
+                    nickname: form.nickname.value,
+                    name: form.name.value,
+                    pw: form.pw.value,
+                }
+            })
+            .then((response) => {
+<!--                update_fieldset.childeren[1].innerText = form.pw.value;-->
+<!--                update_fieldset.childeren[2].innerText = form.name.value;-->
+
+                form.id.value = "";
+                form.name.value = "";
+                form.nickname.value = "";
+                form.pw.value = "";
+            })
+        }
+        function out(delete_id, element){
+            var form = document.getElementById("form_register");
+            axios({
+                method: 'delete',
+                url:'/delete',
+                data: {id: delete_id}
+            })
+            .then((response) => {
+            alert("탈퇴되었습니다.");
+            })
+        }
+    </script>
+</body>
+</html>

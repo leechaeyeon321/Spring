@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+          integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>로그인</title>
+</head>
+<body>
+<form id="form_register" method="post">
+  <fieldset>
+    <legend>Welcome</legend>
+    <input type="hidden" name="name"/>
+    ID: <input type="text" name="nickname" placeholder="아이디">
+    PW: <input type="password" name="pw" placeholder="비밀번호">
+  </fieldset>
+  <button class="login-btn"type="button" onclick="login();">Login</button>
+  <a type="button" href="/register">회원가입</a>
+</form>
+<script>
+        function login(id, element){
+            var form = document.getElementById("form_register");
+            axios.post(`/axios/login`, {nickname: form.nickname.value, pw: form.pw.value})
+            .then((response) => {
+                if(response.data) {
+                    alert(response.data)
+                    document.location.href="/update";
+                }
+                else alert("failed")
+            })
+        }
+    </script>
+</body>
+</html>
